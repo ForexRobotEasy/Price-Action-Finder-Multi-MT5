@@ -1,0 +1,196 @@
+
+//+------------------------------------------------------------------+
+//|                                                    Price Action Finder Multi MT5 |
+//|                                 Copyright © 2021, Forex Robot Easy Team |
+//|                                                 http://www.forexroboteasy.com |
+//+------------------------------------------------------------------+
+
+// Define pattern types
+enum ENUM_PATTERNS
+{
+   PATTERN_PIN_BAR,
+   PATTERN_OUTSIDE_BAR,
+   PATTERN_INSIDE_BAR,
+   PATTERN_PPR,
+   PATTERN_FORCE_BAR,
+   PATTERN_HANGING_MAN,
+   PATTERN_INVERTED_HAMMER
+};
+
+//+------------------------------------------------------------------+
+//| Custom Indicator initialization function                         |
+//+------------------------------------------------------------------+
+int OnInit()
+{
+   // Add necessary indicators and initialize them
+   // ...
+   
+   return(INIT_SUCCEEDED);
+}
+
+//+------------------------------------------------------------------+
+//| Custom Indicator calculation function                            |
+//+------------------------------------------------------------------+
+int OnCalculate(const int rates_total,
+                const int prev_calculated,
+                const datetime &time[],
+                const double &open[],
+                const double &high[],
+                const double &low[],
+                const double &close[],
+                const long &tick_volume[],
+                const long &volume[],
+                const int &spread[])
+{
+   // Iterate through all timeframes
+   for(int tf = PERIOD_M1; tf <= PERIOD_MONTHLY; tf++)
+   {
+      // Switch the timeframe
+      ChartSetInteger(0, CHART_PERIOD, tf);
+      
+      // Iterate through all symbols
+      for(int i = 0; i < SymbolsTotal(false); i++)
+      {
+         // Switch the symbol
+         SymbolSelect(SymbolName(i, false));
+         
+         // Detect and display price action patterns
+         DetectAndDisplayPatterns();
+      }
+   }
+   
+   return(rates_total);
+}
+
+//+------------------------------------------------------------------+
+//| Function to detect and display price action patterns              |
+//+------------------------------------------------------------------+
+void DetectAndDisplayPatterns()
+{
+   // Iterate through all bars
+   for(int i = Bars - 1; i >= 0; i--)
+   {
+      // Check for pattern conditions
+      if(IsPinBar(i))
+      {
+         // Display pin bar pattern
+         DisplayPattern(i, PATTERN_PIN_BAR);
+      }
+      else if(IsOutsideBar(i))
+      {
+         // Display outside bar pattern
+         DisplayPattern(i, PATTERN_OUTSIDE_BAR);
+      }
+      else if(IsInsideBar(i))
+      {
+         // Display inside bar pattern
+         DisplayPattern(i, PATTERN_INSIDE_BAR);
+      }
+      else if(IsPPR(i))
+      {
+         // Display PPR pattern
+         DisplayPattern(i, PATTERN_PPR);
+      }
+      else if(IsForceBar(i))
+      {
+         // Display force bar pattern
+         DisplayPattern(i, PATTERN_FORCE_BAR);
+      }
+      else if(IsHangingMan(i))
+      {
+         // Display hanging man pattern
+         DisplayPattern(i, PATTERN_HANGING_MAN);
+      }
+      else if(IsInvertedHammer(i))
+      {
+         // Display inverted hammer pattern
+         DisplayPattern(i, PATTERN_INVERTED_HAMMER);
+      }
+   }
+}
+
+//+------------------------------------------------------------------+
+//| Function to check if a bar is a Pin Bar                           |
+//+------------------------------------------------------------------+
+bool IsPinBar(const int bar)
+{
+   // Implement Pin Bar detection logic
+   // ...
+   
+   return(false);
+}
+
+//+------------------------------------------------------------------+
+//| Function to check if a bar is an Outside Bar                      |
+//+------------------------------------------------------------------+
+bool IsOutsideBar(const int bar)
+{
+   // Implement Outside Bar detection logic
+   // ...
+   
+   return(false);
+}
+
+//+------------------------------------------------------------------+
+//| Function to check if a bar is an Inside Bar                       |
+//+------------------------------------------------------------------+
+bool IsInsideBar(const int bar)
+{
+   // Implement Inside Bar detection logic
+   // ...
+   
+   return(false);
+}
+
+//+------------------------------------------------------------------+
+//| Function to check if a bar is a PPR                               |
+//+------------------------------------------------------------------+
+bool IsPPR(const int bar)
+{
+   // Implement PPR detection logic
+   // ...
+   
+   return(false);
+}
+
+//+------------------------------------------------------------------+
+//| Function to check if a bar is a Force Bar                         |
+//+------------------------------------------------------------------+
+bool IsForceBar(const int bar)
+{
+   // Implement Force Bar detection logic
+   // ...
+   
+   return(false);
+}
+
+//+------------------------------------------------------------------+
+//| Function to check if a bar is a Hanging Man                       |
+//+------------------------------------------------------------------+
+bool IsHangingMan(const int bar)
+{
+   // Implement Hanging Man detection logic
+   // ...
+   
+   return(false);
+}
+
+//+------------------------------------------------------------------+
+//| Function to check if a bar is an Inverted Hammer                  |
+//+------------------------------------------------------------------+
+bool IsInvertedHammer(const int bar)
+{
+   // Implement Inverted Hammer detection logic
+   // ...
+   
+   return(false);
+}
+
+//+------------------------------------------------------------------+
+//| Function to display a price action pattern on the chart           |
+//+------------------------------------------------------------------+
+void DisplayPattern(const int bar, const ENUM_PATTERNS pattern)
+{
+   // Implement display logic for the specified pattern
+   // ...
+}
